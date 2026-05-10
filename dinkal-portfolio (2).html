@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dinkal Shah &#8211; Digital Marketing Consultant</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --yellow: #F5C518;
+    --black: #111111;
+    --white: #FFFFFF;
+    --gray: #F4F4F4;
+    --dark-gray: #888;
+    --sidebar-w: 160px;
+    --rail-w: 44px;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: #E8E8E8; color: var(--black); overflow-x: hidden; }
+  .rail { position: fixed; right: 0; top: 0; height: 100vh; width: var(--rail-w); background: var(--yellow); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; z-index: 200; }
+  .rail a { color: var(--black); font-size: 17px; text-decoration: none; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: background .2s; }
+  .rail a:hover { background: rgba(0,0,0,.12); }
+  .page { margin-right: var(--rail-w); display: flex; flex-direction: column; gap: 6px; }
+  .section-card { background: var(--white); display: flex; min-height: 100vh; position: relative; overflow: hidden; }
+  .sidebar { width: var(--sidebar-w); background: var(--yellow); flex-shrink: 0; display: flex; flex-direction: column; align-items: center; padding: 24px 0; gap: 0; position: relative; }
+  .sidebar-photo { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 3px solid var(--black); margin-bottom: 20px; background: var(--black); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; color: var(--yellow); letter-spacing: -1px; }
+  .sidebar nav { display: flex; flex-direction: column; width: 100%; margin-top: 10px; }
+  .sidebar nav a { text-decoration: none; color: var(--black); font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; text-align: center; padding: 10px 0; border-top: 1px solid rgba(0,0,0,.1); transition: background .2s, color .2s; }
+  .sidebar nav a:last-child { border-bottom: 1px solid rgba(0,0,0,.1); }
+  .sidebar nav a:hover, .sidebar nav a.active { background: var(--black); color: var(--yellow); }
+  .sidebar-dot { margin-top: auto; width: 8px; height: 8px; border-radius: 50%; background: var(--black); margin-bottom: 16px; }
+  #home { min-height: 100vh; background: var(--white); display: flex; align-items: stretch; overflow: hidden; }
+  .hero-content { flex: 1; padding: 60px 50px 60px 50px; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+  .hero-tag { font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--dark-gray); margin-bottom: 10px; }
+  .hero-hi { font-family: 'DM Sans', sans-serif; font-size: clamp(18px, 3vw, 26px); font-weight: 700; line-height: 1; margin-bottom: 2px; }
+  .hero-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(54px, 8vw, 88px); line-height: .92; color: var(--yellow); letter-spacing: 2px; margin-bottom: 6px; }
+  .hero-role-pill { display: inline-block; background: var(--yellow); color: var(--black); font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 2px; margin-bottom: 20px; }
+  .hero-bio { font-size: 13px; color: #555; line-height: 1.7; max-width: 360px; margin-bottom: 28px; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { background: var(--yellow); color: var(--black); border: none; padding: 11px 24px; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background .2s, transform .15s; display: inline-block; }
+  .btn-primary:hover { background: #e0b000; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--black); border: 2px solid var(--black); padding: 9px 22px; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background .2s, color .2s; display: inline-block; }
+  .btn-outline:hover { background: var(--black); color: var(--white); }
+  .hero-photo { width: 42%; background: #ffffff; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+  .hero-img { width: 100%; height: 100%; object-fit: contain; object-position: center; animation: zoomIn 1.2s ease; }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to left, rgba(0,0,0,0.35), transparent); }
+  .hero-photo-accent { position: absolute; bottom: 0; left: 0; width: 100%; height: 8px; background: var(--yellow); }
+  @keyframes zoomIn { from { transform: scale(1.1); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .section-body { flex: 1; padding: 50px 50px 50px 44px; overflow: hidden; }
+  .section-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 6vw, 72px); letter-spacing: 2px; line-height: 1; color: var(--black); margin-bottom: 6px; }
+  .section-sub { font-size: 13px; color: #666; margin-bottom: 30px; font-weight: 400; }
+  .section-sub strong { color: var(--black); font-weight: 700; }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: #e0e0e0; max-width: 320px; margin-bottom: 30px; }
+  .stat-cell { background: var(--black); color: var(--white); padding: 18px 20px; display: flex; flex-direction: column; }
+  .stat-cell .num { font-family: 'Bebas Neue', sans-serif; font-size: 38px; line-height: 1; color: var(--yellow); }
+  .stat-cell .lbl { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: #aaa; margin-top: 3px; }
+  .what-i-do { background: var(--gray); border-left: 4px solid var(--yellow); padding: 20px 22px; max-width: 320px; }
+  .what-i-do h4 { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1px; margin-bottom: 12px; }
+  .what-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+  .what-icon { width: 28px; height: 28px; background: var(--yellow); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+  .what-item p { font-size: 12px; color: #555; line-height: 1.5; }
+  .what-item p strong { color: var(--black); display: block; font-size: 12px; margin-bottom: 2px; }
+  .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 10px; }
+  .service-card { border: 1px solid #e5e5e5; padding: 24px 20px; position: relative; transition: transform .2s, box-shadow .2s; background: var(--white); }
+  .service-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+  .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--yellow); }
+  .service-icon { width: 40px; height: 40px; background: var(--yellow); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 14px; }
+  .service-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; margin-bottom: 8px; }
+  .service-card p { font-size: 12px; color: #666; line-height: 1.65; }
+  .timeline { position: relative; padding-left: 0; }
+  .timeline-item { display: flex; gap: 20px; margin-bottom: 28px; position: relative; }
+  .timeline-left { display: flex; flex-direction: column; align-items: center; width: 14px; }
+  .tl-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--yellow); border: 2px solid var(--black); flex-shrink: 0; margin-top: 4px; }
+  .tl-line { width: 2px; flex: 1; background: #e0e0e0; margin-top: 4px; }
+  .timeline-item:last-child .tl-line { display: none; }
+  .timeline-content { flex: 1; }
+  .tl-period { display: inline-block; background: var(--yellow); color: var(--black); font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 10px; margin-bottom: 8px; }
+  .tl-title { font-weight: 700; font-size: 15px; margin-bottom: 2px; }
+  .tl-company { font-size: 12px; color: var(--dark-gray); margin-bottom: 10px; font-style: italic; }
+  .tl-bullets { list-style: none; }
+  .tl-bullets li { font-size: 12px; color: #555; padding: 3px 0; padding-left: 14px; position: relative; line-height: 1.5; }
+  .tl-bullets li::before { content: '\25B8'; position: absolute; left: 0; color: var(--yellow); font-size: 10px; top: 4px; }
+  .skills-wrap { display: flex; gap: 30px; flex-wrap: wrap; }
+  .skill-bar-item { margin-bottom: 14px; min-width: 220px; flex: 1; }
+  .skill-bar-item label { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+  .skill-track { height: 6px; background: #e8e8e8; border-radius: 3px; overflow: hidden; }
+  .skill-fill { height: 100%; background: var(--yellow); border-radius: 3px; transform-origin: left; animation: fillBar .8s ease forwards; }
+  @keyframes fillBar { from { width: 0 !important; } }
+  .tools-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .tool-chip { background: var(--black); color: var(--yellow); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 6px 14px; border-radius: 2px; }
+  .edu-card { background: var(--black); color: var(--white); padding: 28px 30px; max-width: 500px; position: relative; overflow: hidden; }
+  .edu-card::after { content: 'BBA'; position: absolute; right: 20px; bottom: 10px; font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: rgba(245,197,24,.08); line-height: 1; }
+  .edu-card .cgpa { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--yellow); line-height: 1; margin-bottom: 4px; }
+  .edu-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .edu-card p { font-size: 12px; color: #aaa; line-height: 1.6; }
+  .project-section-title { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: var(--dark-gray); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+  .project-section-title::after { content: ''; flex: 1; height: 1px; background: #e0e0e0; }
+  .smm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
+  .smm-card { border: 1px solid #e5e5e5; padding: 18px 16px; background: var(--white); transition: transform .2s; }
+  .smm-card:hover { transform: translateY(-2px); }
+  .smm-card .smm-icon { width: 36px; height: 36px; background: var(--yellow); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-bottom: 10px; }
+  .smm-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .smm-card .smm-niche { font-size: 10px; color: var(--dark-gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .smm-card p { font-size: 11px; color: #666; line-height: 1.5; }
+  .smm-card a { display: inline-block; margin-top: 8px; font-size: 10px; font-weight: 700; color: var(--black); text-decoration: none; letter-spacing: 1px; text-transform: uppercase; border-bottom: 2px solid var(--yellow); padding-bottom: 1px; }
+  .seo-grids { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 30px; }
+  .seo-block { background: var(--gray); padding: 18px; }
+  .seo-block h4 { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 1px; margin-bottom: 12px; border-bottom: 2px solid var(--yellow); padding-bottom: 6px; }
+  .rank-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px dashed #ddd; }
+  .rank-row:last-child { border-bottom: none; }
+  .rank-kw { font-size: 11px; font-weight: 600; flex: 1; }
+  .rank-badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 2px; white-space: nowrap; }
+  .rank-badge.p1 { background: var(--yellow); color: var(--black); }
+  .rank-badge.p2 { background: #e8e8e8; color: #555; }
+  .ads-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .ads-card { border: 2px solid var(--black); padding: 24px; position: relative; overflow: hidden; }
+  .ads-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: var(--yellow); }
+  .ads-card .platform { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; margin-top: 4px; }
+  .ads-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; margin-bottom: 8px; }
+  .ads-card .obj { font-size: 11px; color: #666; margin-bottom: 12px; }
+  .ads-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .metric-box { background: var(--black); color: var(--white); padding: 10px 12px; }
+  .metric-box .mval { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--yellow); line-height: 1; }
+  .metric-box .mlbl { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: #aaa; margin-top: 2px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  .contact-info p { font-size: 13px; color: #666; line-height: 1.7; margin-bottom: 24px; }
+  .contact-detail { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .cd-icon { width: 36px; height: 36px; background: var(--yellow); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .cd-text small { display: block; font-size: 10px; color: var(--dark-gray); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+  .cd-text span { font-size: 13px; font-weight: 600; }
+  .contact-cta { background: var(--black); color: var(--white); padding: 32px; display: flex; flex-direction: column; justify-content: center; }
+  .contact-cta h3 { font-family: 'Bebas Neue', sans-serif; font-size: 34px; letter-spacing: 1px; margin-bottom: 10px; }
+  .contact-cta p { font-size: 12px; color: #aaa; line-height: 1.7; margin-bottom: 20px; }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .55s ease, transform .55s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  footer { background: var(--black); color: #555; text-align: center; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; padding: 18px; margin-right: var(--rail-w); }
+  footer span { color: var(--yellow); }
+
+  .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: #e0e0e0; }
+  .result-card { background: var(--white); padding: 28px 28px 22px; border-left: 4px solid transparent; transition: border-color .25s, background .2s; position: relative; }
+  .result-card.accent-yellow { border-left-color: var(--yellow); }
+  .result-card.accent-black { border-left-color: var(--black); }
+  .result-card:hover { background: var(--gray); }
+  .result-card .rval { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 72px); line-height: 1; margin-bottom: 10px; }
+  .result-card.accent-yellow .rval { color: var(--yellow); -webkit-text-stroke: 1px var(--black); }
+  .result-card.accent-black .rval { color: var(--black); }
+  .result-card .rtitle { font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+  .result-card .rsub { font-size: 12px; color: var(--dark-gray); }
+
+  .seo-perf-info { background: var(--gray); border: 1px solid #e0e0e0; border-left: 4px solid var(--yellow); padding: 12px 20px; font-size: 12px; color: #555; font-style: italic; margin-bottom: 20px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .seo-perf-info span::before { content: '\2022 '; color: var(--yellow); }
+  .seo-kw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: #e0e0e0; margin-bottom: 30px; }
+  .seo-kw-card { background: var(--white); padding: 20px 22px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid transparent; transition: border-color .2s, background .2s; }
+  .seo-kw-card:hover { background: var(--gray); }
+  .seo-kw-card.border-yellow { border-left-color: var(--yellow); }
+  .seo-kw-card.border-black { border-left-color: var(--black); }
+  .seo-kw-card .kw-text { font-size: 14px; font-weight: 600; color: var(--black); }
+  .seo-kw-card .kw-sub { font-size: 11px; color: var(--dark-gray); margin-top: 4px; }
+  .seo-kw-card .kw-rank { font-family: 'Bebas Neue', sans-serif; font-size: 32px; line-height: 1; }
+  .seo-kw-card.border-yellow .kw-rank { color: var(--yellow); -webkit-text-stroke: 1px var(--black); }
+  .seo-kw-card.border-black .kw-rank { color: var(--black); }
+
+  .traffic-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; background: #e0e0e0; margin-bottom: 24px; }
+  .traffic-stat { background: var(--white); padding: 20px 18px; border-top: 4px solid transparent; }
+  .traffic-stat:nth-child(odd) { border-top-color: var(--yellow); }
+  .traffic-stat:nth-child(even) { border-top-color: var(--black); }
+  .traffic-stat .tval { font-family: 'Bebas Neue', sans-serif; font-size: 36px; line-height: 1; margin-bottom: 4px; color: var(--black); }
+  .traffic-stat:nth-child(odd) .tval { color: var(--yellow); -webkit-text-stroke: 1px rgba(0,0,0,.2); }
+  .traffic-stat .tlbl { font-size: 12px; color: var(--dark-gray); margin-bottom: 6px; }
+  .traffic-stat .tgrowth { font-size: 13px; font-weight: 700; }
+  .traffic-stat:nth-child(odd) .tgrowth { color: #333; }
+  .traffic-stat:nth-child(even) .tgrowth { color: #b59010; }
+
+  .chart-wrap { background: var(--gray); padding: 24px; position: relative; border-left: 4px solid var(--yellow); }
+  .chart-legend { display: flex; gap: 20px; margin-bottom: 16px; font-size: 11px; color: var(--dark-gray); letter-spacing: .5px; }
+  .chart-legend span { display: flex; align-items: center; gap: 6px; }
+  .leg-dot { width: 12px; height: 12px; border-radius: 2px; }
+  .leg-prev { background: #ccc; }
+  .leg-camp { background: var(--yellow); }
+  canvas#trafficChart { width: 100% !important; }
+
+  @media (max-width: 768px) {
+    :root { --sidebar-w: 0px; }
+    .sidebar { display: none; }
+    .hero-photo { width: 38%; }
+    .services-grid, .seo-grids, .ads-grid, .contact-grid { grid-template-columns: 1fr; }
+    .smm-grid { grid-template-columns: 1fr 1fr; }
+    .section-body { padding: 30px 20px; }
+    .hero-content { padding: 40px 24px; }
+    .results-grid, .seo-kw-grid { grid-template-columns: 1fr; }
+    .traffic-stats { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .smm-grid { grid-template-columns: 1fr; }
+    .hero-photo { display: none; }
+    .ads-metrics { grid-template-columns: 1fr 1fr; }
+    .traffic-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- RIGHT RAIL NAV -->
+<div class="rail">
+  <a href="#home" title="Home">&#127968;</a>
+  <a href="#about" title="About">&#128100;</a>
+  <a href="#services" title="Services">&#9881;&#65039;</a>
+  <a href="#experience" title="Experience">&#128188;</a>
+  <a href="#skills" title="Skills">&#128202;</a>
+  <a href="#projects" title="Projects">&#128193;</a>
+  <a href="#contact" title="Contact">&#9993;&#65039;</a>
+</div>
+
+<div class="page">
+
+  <!-- HERO -->
+  <section id="home" class="section-card" style="min-height:100vh;">
+    <div class="hero-content">
+      <div class="hero-tag">Digital Marketing Consultant</div>
+      <div class="hero-hi">HI THERE!</div>
+      <div class="hero-name">I'M DINKAL</div>
+      <div class="hero-role-pill">SEO &middot; Social Media &middot; Google &amp; Meta Ads</div>
+      <p class="hero-bio">
+        I help businesses increase online visibility, generate high-quality leads, and improve ROI through data-driven digital strategies &mdash; including up to
+        <strong>120% growth in website traffic</strong>.
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary">View Case Studies</a>
+        <a href="#contact" class="btn-outline">Book Free Consultation</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img
+        src="https://raw.githubusercontent.com/Sharmaji4103/Dhyey-portfolio-/main/Dinkal 01.png"
+        alt="Dinkal Shah"
+        class="hero-img"
+      >
+      <div class="hero-overlay"></div>
+      <div class="hero-photo-accent"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section-card">
+    <div class="sidebar">
+      <div class="sidebar-photo">DS</div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about" class="active">About Me</a>
+        <a href="#services">Services</a>
+        <a href="#experience">Resume</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="sidebar-dot"></div>
+    </div>
+    <div class="section-body">
+      <div class="reveal">
+        <div class="section-heading">ABOUT ME</div>
+        <p class="section-sub">I'm <strong>Dinkal Shah</strong>, Digital Marketing Consultant</p>
+      </div>
+      <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start;">
+        <div class="reveal" style="flex:1;min-width:260px;">
+          <p style="font-size:13px;color:#555;line-height:1.75;margin-bottom:20px;">I specialize in SEO, Social Media Marketing, and performance-driven advertising. My approach is rooted in data &mdash; every strategy I build is designed to deliver measurable, scalable results for the businesses I work with.</p>
+          <div class="stats-grid">
+            <div class="stat-cell"><span class="num">3+</span><span class="lbl">Companies Worked</span></div>
+            <div class="stat-cell"><span class="num">120%</span><span class="lbl">Traffic Growth</span></div>
+            <div class="stat-cell"><span class="num">19K+</span><span class="lbl">App Installs</span></div>
+            <div class="stat-cell"><span class="num">1M+</span><span class="lbl">Ad Reach</span></div>
+          </div>
+        </div>
+        <div class="reveal" style="flex:1;min-width:240px;">
+          <div class="what-i-do">
+            <h4>What I Do?</h4>
+            <div class="what-item"><div class="what-icon">&#128269;</div><p><strong>SEO Strategy</strong>End-to-end on-page, off-page &amp; technical SEO to boost organic rankings.</p></div>
+            <div class="what-item"><div class="what-icon">&#128241;</div><p><strong>Social Media Marketing</strong>Content strategy &amp; community management across all major platforms.</p></div>
+            <div class="what-item"><div class="what-icon">&#128227;</div><p><strong>Paid Advertising</strong>Google &amp; Meta ad campaigns focused on ROI and cost-efficient conversions.</p></div>
+            <div class="what-item"><div class="what-icon">&#9997;&#65039;</div><p><strong>Content Writing</strong>SEO-optimized copy, blogs, and ad creatives that convert visitors.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section-card">
+    <div class="sidebar">
+      <div class="sidebar-photo">DS</div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Me</a>
+        <a href="#services" class="active">Services</a>
+        <a href="#experience">Resume</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="sidebar-dot"></div>
+    </div>
+    <div class="section-body">
+      <div class="reveal">
+        <div class="section-heading">SERVICES</div>
+        <p class="section-sub">What I offer to grow your business online</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal"><div class="service-icon">&#128241;</div><h3>Social Media Marketing</h3><p>Strategic social media campaigns to build brand awareness, increase engagement, and generate leads. From content planning to performance tracking across Instagram, Facebook, and LinkedIn.</p></div>
+        <div class="service-card reveal"><div class="service-icon">&#128269;</div><h3>SEO</h3><p>End-to-end SEO solutions including keyword research, competitor analysis, technical audits, on-page optimization, and off-page strategies to drive organic traffic and improve rankings.</p></div>
+        <div class="service-card reveal"><div class="service-icon">&#128227;</div><h3>Google &amp; Meta Ads</h3><p>Performance-driven ad campaigns on Google Ads and Meta (Facebook &amp; Instagram). Audience targeting to continuous optimization &mdash; maximizing ROI and reducing cost per lead.</p></div>
+        <div class="service-card reveal"><div class="service-icon">&#9997;&#65039;</div><h3>Content Writing</h3><p>SEO-optimized and engaging content including website copy, blogs, and ad creatives. Strategies designed to attract the right audience and convert visitors into customers.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="section-card">
+    <div class="sidebar">
+      <div class="sidebar-photo">DS</div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Me</a>
+        <a href="#services">Services</a>
+        <a href="#experience" class="active">Resume</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="sidebar-dot"></div>
+    </div>
+    <div class="section-body">
+      <div class="reveal">
+        <div class="section-heading">EXPERIENCE</div>
+        <p class="section-sub">My professional journey in digital marketing</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="timeline-content">
+            <div class="tl-period">Nov 2025 &ndash; Present</div>
+            <div class="tl-title">Digital Marketing Executive</div>
+            <div class="tl-company">SEO Web Planet Solution, Vadodara</div>
+            <ul class="tl-bullets">
+              <li>Executed end-to-end SEO strategies (On-Page, Off-Page, Technical)</li>
+              <li>Increased organic traffic by 30%+ across multiple projects</li>
+              <li>Conducted keyword research &amp; competitor analysis for growth opportunities</li>
+              <li>Optimized meta tags, internal linking, and content for better rankings</li>
+              <li>Managed Google Business Profile, improving local visibility and leads</li>
+              <li>Created SEO blogs and content calendars for consistent traffic growth</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="timeline-content">
+            <div class="tl-period">Jun 2025 &ndash; Oct 2025</div>
+            <div class="tl-title">Social Media Executive</div>
+            <div class="tl-company">Namah Softech Pvt. Ltd, Vadodara</div>
+            <ul class="tl-bullets">
+              <li>Managed LinkedIn, Instagram, Facebook, and YouTube accounts</li>
+              <li>Increased LinkedIn followers by 250+ in just 2 months</li>
+              <li>Boosted engagement by 35% through targeted content strategies</li>
+              <li>Planned and executed monthly content calendars</li>
+              <li>Designed creatives using Canva to improve reach and engagement</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="timeline-content">
+            <div class="tl-period">Jan 2025 &ndash; May 2025</div>
+            <div class="tl-title">Digital Marketing Executive</div>
+            <div class="tl-company">Tapitt (Remote)</div>
+            <ul class="tl-bullets">
+              <li>Executed SEO, SMM, and paid ad campaigns</li>
+              <li>Increased LinkedIn followers by 400+ and engagement by 35%</li>
+              <li>Improved organic traffic by 40% through SEO strategies</li>
+              <li>Ran Meta Ads campaigns for lead generation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" style="margin-top:8px;">
+        <div class="project-section-title">Education</div>
+        <div class="edu-card">
+          <div class="cgpa">8.16<span style="font-size:24px;color:#aaa;">/10</span></div>
+          <h3>Bachelor of Business Administration (BBA) &ndash; Marketing</h3>
+          <p>IIIM, Charotar University of Science and Technology, Anand<br/>Graduated: May 2025</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section-card">
+    <div class="sidebar">
+      <div class="sidebar-photo">DS</div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Me</a>
+        <a href="#services">Services</a>
+        <a href="#experience">Resume</a>
+        <a href="#skills" class="active">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="sidebar-dot"></div>
+    </div>
+    <div class="section-body">
+      <div class="reveal">
+        <div class="section-heading">SKILLS</div>
+        <p class="section-sub">Tools and expertise I bring to every project</p>
+      </div>
+      <div class="skills-wrap">
+        <div style="flex:1;min-width:220px;" class="reveal">
+          <div class="skill-bar-item"><label><span>SEO</span><span>92%</span></label><div class="skill-track"><div class="skill-fill" style="width:92%"></div></div></div>
+          <div class="skill-bar-item"><label><span>Social Media Marketing</span><span>90%</span></label><div class="skill-track"><div class="skill-fill" style="width:90%"></div></div></div>
+          <div class="skill-bar-item"><label><span>Google Ads</span><span>85%</span></label><div class="skill-track"><div class="skill-fill" style="width:85%"></div></div></div>
+          <div class="skill-bar-item"><label><span>Meta Ads</span><span>85%</span></label><div class="skill-track"><div class="skill-fill" style="width:85%"></div></div></div>
+          <div class="skill-bar-item"><label><span>Content Writing</span><span>88%</span></label><div class="skill-track"><div class="skill-fill" style="width:88%"></div></div></div>
+          <div class="skill-bar-item"><label><span>Keyword Research</span><span>90%</span></label><div class="skill-track"><div class="skill-fill" style="width:90%"></div></div></div>
+        </div>
+        <div style="flex:1;min-width:220px;" class="reveal">
+          <div style="margin-bottom:16px;">
+            <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dark-gray);margin-bottom:12px;">Tools &amp; Platforms</p>
+            <div class="tools-grid">
+              <div class="tool-chip">Google Analytics</div>
+              <div class="tool-chip">Search Console</div>
+              <div class="tool-chip">SEMrush</div>
+              <div class="tool-chip">Ubersuggest</div>
+              <div class="tool-chip">Google Ads</div>
+              <div class="tool-chip">Meta Ads Manager</div>
+              <div class="tool-chip">Canva</div>
+              <div class="tool-chip">WordPress</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section-card" style="min-height:auto;">
+    <div class="sidebar">
+      <div class="sidebar-photo">DS</div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Me</a>
+        <a href="#services">Services</a>
+        <a href="#experience">Resume</a>
+        <a href="#projects" class="active">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="sidebar-dot"></div>
+    </div>
+    <div class="section-body">
+      <div class="reveal">
+        <div class="section-heading">PORTFOLIO</div>
+        <p class="section-sub">Featured projects &amp; real-world results</p>
+      </div>
+
+      <!-- Social Media Management -->
+      <div class="project-section-title reveal">Social Media Management</div>
+      <div class="smm-grid reveal">
+        <div class="smm-card">
+          <div class="smm-icon">&#127981;</div>
+          <h4>Best Value Chem Pvt. Ltd.</h4>
+          <div class="smm-niche">Chemical Manufacturing</div>
+          <p>Managed LinkedIn presence focusing on brand-aligned B2B content and consistent engagement to strengthen digital presence.</p>
+          <a href="https://www.linkedin.com/company/best-value-chem-pvt-ltd/" target="_blank">View Profile &rarr;</a>
+        </div>
+        <div class="smm-card">
+          <div class="smm-icon">&#128187;</div>
+          <h4>Proses India</h4>
+          <div class="smm-niche">IT &amp; Software Solutions</div>
+          <p>Social media strategy around AI, automation &amp; digital solutions content to improve brand visibility and engagement.</p>
+          <a href="https://in.linkedin.com/company/proses-india" target="_blank">View Profile &rarr;</a>
+        </div>
+        <div class="smm-card" style="background:var(--yellow);">
+          <div class="smm-icon" style="background:var(--black);">&#128200;</div>
+          <h4 style="color:var(--black);">Krisia The Label</h4>
+          <div class="smm-niche" style="color:rgba(0,0,0,.5);">FASHION INDUSTRY</div>
+          <p style="color:rgba(0,0,0,.7);">Managed <strong>Instagram</strong> presence with visually consistent, brand-aligned content to strengthen audience engagement and overall social presence.</p>
+          <a href="https://www.instagram.com/krisiathelabel/" target="_blank">View Profile &rarr;</a>
+        </div>
+      </div>
+
+      <!-- ── Results at a Glance (NOW BEFORE SEO Performance – Google Rankings) ── -->
+      <div class="project-section-title reveal">Results at a Glance</div>
+      <div class="reveal" style="margin-bottom:30px;">
+        <p style="font-size:13px;color:#666;margin-bottom:18px;">Numbers that speak for themselves.</p>
+        <div class="results-grid">
+          <div class="result-card accent-yellow">
+            <div class="rval">267%</div>
+            <div class="rtitle">Growth in Website Users</div>
+            <div class="rsub">vs. previous period</div>
+          </div>
+          <div class="result-card accent-black">
+            <div class="rval">#1</div>
+            <div class="rtitle">Google Rankings Achieved</div>
+            <div class="rsub">across 6 competitive keywords</div>
+          </div>
+          <div class="result-card accent-yellow">
+            <div class="rval">7%</div>
+            <div class="rtitle">Average Click-Through Rate</div>
+            <div class="rsub">vs. 2&ndash;3% industry benchmark</div>
+          </div>
+          <div class="result-card accent-black">
+            <div class="rval">305%</div>
+            <div class="rtitle">Growth in Engagement Events</div>
+            <div class="rsub">tracked via Google Analytics</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEO Performance – Google Rankings -->
+      <div class="project-section-title reveal">SEO Performance &ndash; Google Rankings</div>
+      <div class="seo-grids reveal">
+        <div class="seo-block">
+          <h4>Mobile App &ndash; Wardrobe</h4>
+          <div class="rank-row"><span class="rank-kw">best digital wardrobe 2026</span><span class="rank-badge p1">#2 Page 1</span></div>
+          <div class="rank-row"><span class="rank-kw">digitized wardrobe management</span><span class="rank-badge p1">#4 Page 1</span></div>
+          <div class="rank-row"><span class="rank-kw">digital wardrobe app</span><span class="rank-badge p2">#12 Page 2</span></div>
+          <div class="rank-row"><span class="rank-kw">best app for wardrobe management</span><span class="rank-badge p2">#12 Page 2</span></div>
+        </div>
+        <div class="seo-block">
+          <h4>Manufacturing Industry</h4>
+          <div class="rank-row"><span class="rank-kw">Precision Manufacturing in India</span><span class="rank-badge p1">#2 Page 1</span></div>
+          <div class="rank-row"><span class="rank-kw">4 axis cnc machining</span><span class="rank-badge p2">#14 Page 2</span></div>
+          <div class="rank-row"><span class="rank-kw">synthetic diamond manufacturing machine</span><span class="rank-badge p2">#11 Page 2</span></div>
+        </div>
+      </div>
+
+      <!-- SEO Performance IT Client -->
+      <div class="project-section-title reveal">SEO Performance &ndash; Page 1 Google Rankings for an IT Client</div>
+      <div class="reveal">
+        <div class="seo-kw-grid">
+          <div class="seo-kw-card border-yellow">
+            <div><div class="kw-text">IT Managed Service Provider &ndash; Tracy</div><div class="kw-sub">Google Page 1</div></div>
+            <div class="kw-rank">#2</div>
+          </div>
+          <div class="seo-kw-card border-black">
+            <div><div class="kw-text">IT Support &ndash; Tracy</div><div class="kw-sub">Google Page 1</div></div>
+            <div class="kw-rank">#1</div>
+          </div>
+          <div class="seo-kw-card border-yellow">
+            <div><div class="kw-text">Managed IT Services &ndash; Tracy</div><div class="kw-sub">Google Page 1</div></div>
+            <div class="kw-rank">#2</div>
+          </div>
+          <div class="seo-kw-card border-yellow">
+            <div><div class="kw-text">Managed IT Support &ndash; Tracy</div><div class="kw-sub">Google Page 1</div></div>
+            <div class="kw-rank">#2</div>
+          </div>
+          <div class="seo-kw-card border-black">
+            <div><div class="kw-text">IT Services &ndash; Livermore</div><div class="kw-sub">Google Page 1</div></div>
+            <div class="kw-rank">#1</div>
+          </div>
+          <div class="seo-kw-card border-black">
+            <div><div class="kw-text">IT Support Services &ndash; Livermore</div><div class="kw-sub">Google Page 1</div></div>
+            <div class="kw-rank">#1</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Website Traffic Growth -->
+      <div class="project-section-title reveal">Website Traffic Growth &ndash; Google Analytics Campaign Snapshot</div>
+      <div class="reveal">
+        <div class="traffic-stats" style="margin-bottom:20px;">
+          <div class="traffic-stat">
+            <div class="tval">1.5K</div>
+            <div class="tlbl">Active Users</div>
+            <div class="tgrowth">+267%</div>
+          </div>
+          <div class="traffic-stat">
+            <div class="tval">20K</div>
+            <div class="tlbl">Events Tracked</div>
+            <div class="tgrowth">+305%</div>
+          </div>
+          <div class="traffic-stat">
+            <div class="tval">6.9K</div>
+            <div class="tlbl">Total Page Views</div>
+            <div class="tgrowth">+299%</div>
+          </div>
+          <div class="traffic-stat">
+            <div class="tval">62</div>
+            <div class="tlbl">Purchases / Conversions</div>
+            <div class="tgrowth">+210%</div>
+          </div>
+        </div>
+        <div class="chart-wrap" style="margin-bottom:30px;">
+          <div class="chart-legend">
+            <span><div class="leg-dot leg-prev"></div> Previous Period</span>
+            <span><div class="leg-dot leg-camp"></div> Campaign Period</span>
+          </div>
+          <canvas id="trafficChart" height="220"></canvas>
+        </div>
+      </div>
+
+      <!-- Paid Advertising Case Studies -->
+      <div class="project-section-title reveal">Paid Advertising Case Studies</div>
+      <div class="ads-grid reveal">
+        <div class="ads-card">
+          <div class="platform">&#128309; Google Ads &ndash; App Install Campaign</div>
+          <h3>App Install Campaign</h3>
+          <p class="obj">Drive maximum app installs at a low cost using targeted Google Ads campaigns optimized for Android &amp; iOS users with video-based creatives.</p>
+          <div class="ads-metrics">
+            <div class="metric-box"><div class="mval">19,632+</div><div class="mlbl">Total Installs</div></div>
+            <div class="metric-box"><div class="mval">&#8377;5.73</div><div class="mlbl">Avg Cost/Install</div></div>
+            <div class="metric-box"><div class="mval">12,308</div><div class="mlbl">Top Campaign Installs</div></div>
+            <div class="metric-box"><div class="mval">12.53%</div><div class="mlbl">Best Conversion Rate</div></div>
+          </div>
+          <p style="font-size:11px;margin-top:10px;color:#666;">Top performing campaign: <strong>12,308 installs at just &#8377;4.03 CPI</strong></p>
+        </div>
+        <div class="ads-card">
+          <div class="platform">&#128995; Meta Ads &ndash; App Install Campaign</div>
+          <h3>App Install Campaign</h3>
+          <p class="obj">Drive mobile app installs and maximize reach using Meta Ads (Facebook &amp; Instagram) with video creatives and targeted audience optimization.</p>
+          <div class="ads-metrics">
+            <div class="metric-box"><div class="mval">6,000+</div><div class="mlbl">Total Installs</div></div>
+            <div class="metric-box"><div class="mval">1M+</div><div class="mlbl">Total Reach</div></div>
+            <div class="metric-box"><div class="mval">2.3M+</div><div class="mlbl">Total Impressions</div></div>
+            <div class="metric-box"><div class="mval">&#8377;6.09</div><div class="mlbl">Cost/Install</div></div>
+          </div>
+          <p style="font-size:11px;margin-top:10px;color:#666;">Total clicks: <strong>13,000+</strong> with high reach &amp; engagement at cost-efficient CPI</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section-card">
+    <div class="sidebar">
+      <div class="sidebar-photo">DS</div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Me</a>
+        <a href="#services">Services</a>
+        <a href="#experience">Resume</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact" class="active">Contact</a>
+      </nav>
+      <div class="sidebar-dot"></div>
+    </div>
+    <div class="section-body">
+      <div class="reveal">
+        <div class="section-heading">CONTACT</div>
+        <p class="section-sub">Let's work together to grow your business</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <p>Ready to boost your online presence? I'd love to hear about your business goals and discuss how I can help you achieve them through smart digital marketing strategies.</p>
+          <div class="contact-detail"><div class="cd-icon">&#128205;</div><div class="cd-text"><small>Location</small><span>Vadodara, Gujarat, India</span></div></div>
+          <div class="contact-detail"><div class="cd-icon">&#127891;</div><div class="cd-text"><small>Education</small><span>BBA Marketing &ndash; CHARUSAT, Anand</span></div></div>
+          <div class="contact-detail"><div class="cd-icon">&#128188;</div><div class="cd-text"><small>Current Role</small><span>Digital Marketing Executive @ SEO Web Planet</span></div></div>
+          <div class="contact-detail"><div class="cd-icon">&#128279;</div><div class="cd-text"><small>LinkedIn</small><span>linkedin.com/in/dinkalshah</span></div></div>
+          <div class="contact-detail"><div class="cd-icon">&#9993;&#65039;</div><div class="cd-text"><small>Email</small><span><a href="mailto:dinkalshah09@gmail.com" style="color:var(--black);text-decoration:none;">dinkalshah09@gmail.com</a></span></div></div>
+        </div>
+        <div class="contact-cta reveal">
+          <h3>BOOK A FREE CONSULTATION</h3>
+          <p>Whether you need SEO, social media management, paid ads, or a complete digital strategy &mdash; let's have a conversation and see how I can help your brand grow.</p>
+          <a href="mailto:dinkalshah09@gmail.com" class="btn-primary" style="align-self:flex-start;">Get In Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>&copy; 2026 <span>Dinkal Shah</span> &middot; Digital Marketing Consultant &middot; All Rights Reserved</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => obs.observe(el));
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.sidebar nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
+    navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+  });
+
+  const ctx = document.getElementById('trafficChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Active Users', 'Event Count', 'Page Views', 'Purchases'],
+      datasets: [
+        { label: 'Previous Period', data: [410, 4900, 1720, 20], backgroundColor: '#cccccc', borderRadius: 3, borderSkipped: false },
+        { label: 'Campaign Period', data: [1500, 20000, 6900, 62], backgroundColor: '#F5C518', borderRadius: 3, borderSkipped: false }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#111111',
+          titleColor: '#fff',
+          bodyColor: '#F5C518',
+          borderColor: 'rgba(245,197,24,.4)',
+          borderWidth: 1,
+          padding: 10,
+        }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,.06)' }, ticks: { color: '#888', font: { size: 11 } }, border: { color: 'rgba(0,0,0,.1)' } },
+        y: { grid: { color: 'rgba(0,0,0,.06)' }, ticks: { color: '#888', font: { size: 11 } }, border: { color: 'rgba(0,0,0,.1)' } }
+      },
+      animation: { duration: 1200, easing: 'easeOutQuart' }
+    }
+  });
+</script>
+</body>
+</html>
